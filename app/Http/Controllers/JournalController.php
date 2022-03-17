@@ -51,7 +51,7 @@ class JournalController extends Controller
         $attr['user_id'] = auth()->id();
         Journal::create($attr);
 
-        return redirect()->route('journal.index');
+        return redirect()->route('journal.index')->with('message', 'Journal Created Successfully');
     }
 
     /**
@@ -89,6 +89,7 @@ class JournalController extends Controller
         $journal = $request->validate([
             'title' => 'required',
             'date' => 'required',
+            'description' => 'nullable',
             'duration' => 'required',
             'mentee' => 'required',
         ]);
@@ -107,9 +108,8 @@ class JournalController extends Controller
     public function destroy($id)
     {
         $journal = Journal::findOrFail($id);
-        dd($journal);
-        // $journal->delete();
+        $journal->delete();
         
-        // return redirect()->route('journal.index')->with('message', 'Journal Delete Successfully');
+        return redirect()->route('journal.index')->with('message', 'Journal Delete Successfully');
     }
 }

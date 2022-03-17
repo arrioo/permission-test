@@ -45,6 +45,7 @@
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Delete ?')">Delete</button>
+                                                </form>
                                                 @endcan
                                             </td>
                                         </tr>

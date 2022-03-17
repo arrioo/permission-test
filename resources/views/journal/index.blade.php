@@ -33,25 +33,26 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($journals as $journal)
-                                    <tr>
-                                        <td scope="row">{{ $loop->iteration }}</td>
-                                        <td>{{ $journal->title }}</td>
-                                        <td>{{ $journal->date }}</td>
-                                        <td>{{ $journal->duration }}</td>
-                                        <td>{{ $journal->mentee }}</td>
-                                        <td>
-                                            <a href="{{ route('journal.show', $journal->id) }}" class="btn btn-primary" role="button">Show</a>
-                                            @can('journal-update')
-                                            <a href="{{ route('journal.edit', $journal->id) }}" class="btn btn-warning" role="button">Update</a>
-                                            @endcan
-                                            @can('journal-delete')
-                                            <form action="{{ route('journal.destroy', $journal->id) }}" class="d-inline" method="post"></form>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $journal->title }}</td>
+                                            <td>{{ $journal->date }}</td>
+                                            <td>{{ $journal->duration }}</td>
+                                            <td>{{ $journal->mentee }}</td>
+                                            <td>
+                                                <a href="{{ route('journal.show', $journal->id) }}" class="btn btn-primary" role="button">Show</a>
+                                                @can('journal-update')
+                                                <a href="{{ route('journal.edit', $journal->id) }}" class="btn btn-warning" role="button">Update</a>
+                                                @endcan
+                                                @can('journal-delete')
+                                                <form action="{{ route('journal.destroy', $journal->id) }}" class="d-inline" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete?')">Delete</button>
+                                                </form>
+                                                @endcan
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                         </table>
